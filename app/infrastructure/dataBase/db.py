@@ -8,7 +8,7 @@ engine = create_engine(os.environ["DATABASE_URL"])
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
-def depends_db():
+def get_db():
     db_session = SessionLocal()
     try:
         yield db_session
