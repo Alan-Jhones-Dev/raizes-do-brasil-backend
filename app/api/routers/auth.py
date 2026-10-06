@@ -9,7 +9,7 @@ from app.infrastructure.security.jwt import criar_token
 router_auth = APIRouter()
 
 
-@router_auth.post("/login")
+@router_auth.post("/login", tags=['Login'])
 async def login_usuario(dados: LoginSchema, db: Session = Depends(get_db)):
     busca_email = db.query(Usuario).filter(Usuario.email == dados.email).first()
 

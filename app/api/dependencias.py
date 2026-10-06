@@ -12,12 +12,10 @@ def autenticar_acesso(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=401, detail="Autenticação invalida")
     return token_autenticado
 
-def autorizacao_acesso(perfil_autorizado:list):
+def autorizacao_acesso(perfil_autorizado: list):
     def fabrica_permissao(usuario: dict = Depends(autenticar_acesso)):
         if usuario["perfil"] in perfil_autorizado:
-            return "Usuario autorizado"
+            return usuario
         else:
             raise HTTPException(status_code=403, detail='Usuario nao autorizado')
     return fabrica_permissao
-
-
